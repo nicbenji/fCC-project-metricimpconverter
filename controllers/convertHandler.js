@@ -4,7 +4,7 @@ function ConvertHandler() {
   this.getNum = function(input) {
     const number = input.match(/(\d*\.?\d+)/g);
     console.log(number);
-    if (n === null) {
+    if (number === null) {
       return 1;
     }
     if (number.length > 2) {
@@ -16,9 +16,8 @@ function ConvertHandler() {
       const numerator = number[0];
       const denominator = number[1];
       return numerator / denominator;
-    } else {
-      return Number(number[0]);
     }
+    return Number(number[0]);
   };
 
 
