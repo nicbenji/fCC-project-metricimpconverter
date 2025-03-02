@@ -26,26 +26,32 @@ function ConvertHandler() {
   Object.defineProperty(this, 'units', {
     value: {
       km: {
+        spelledOut: 'kilometers',
         returnUnit: 'mi',
         conversion: ''
       },
       mi: {
+        spelledOut: 'miles',
         returnUnit: 'km',
         conversion: ''
       },
       kg: {
+        spelledOut: 'kilograms',
         returnUnit: 'lbs',
         conversion: ''
       },
       lbs: {
+        spelledOut: 'pounds',
         returnUnit: 'kg',
         conversion: ''
       },
       l: {
+        spelledOut: 'liters',
         returnUnit: 'gal',
         conversion: ''
       },
       gal: {
+        spelledOut: 'gallons',
         returnUnit: 'l',
         conversion: ''
       }
@@ -77,9 +83,11 @@ function ConvertHandler() {
   };
 
   this.spellOutUnit = function(unit) {
-    let result;
-
-    return result;
+    const spelledOutUnit = this.units[unit]?.spelledOut;
+    if (!spelledOutUnit) {
+      throw new Error(`Unsupported unit: ${unit}`);
+    }
+    return spelledOutUnit;
   };
 
   this.convert = function(initNum, initUnit) {

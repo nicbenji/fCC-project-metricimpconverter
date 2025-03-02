@@ -84,4 +84,15 @@ suite('Unit Tests', function() {
 
   });
 
+  suite('spellOutUnit()', () => {
+
+    test('shoud correctly return the spelled-out string unit for each valid input', () => {
+      let input = 'l';
+      assert.deepEqual(convertHandler.spellOutUnit(input), 'liters');
+      input = 'mi';
+      assert.deepEqual(convertHandler.spellOutUnit(input), 'miles')
+    });
+
+  });
+
 });
