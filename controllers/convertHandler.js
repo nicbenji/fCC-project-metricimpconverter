@@ -28,7 +28,7 @@ function ConvertHandler() {
       km: {
         spelledOut: 'kilometers',
         returnUnit: 'mi',
-        conversion: ''
+        conversion: 1 / 1.60934
       },
       mi: {
         spelledOut: 'miles',
@@ -38,7 +38,7 @@ function ConvertHandler() {
       kg: {
         spelledOut: 'kilograms',
         returnUnit: 'lbs',
-        conversion: ''
+        conversion: 1 / 0.453592
       },
       lbs: {
         spelledOut: 'pounds',
@@ -48,7 +48,7 @@ function ConvertHandler() {
       l: {
         spelledOut: 'liters',
         returnUnit: 'gal',
-        conversion: ''
+        conversion: 1 / 3.78541
       },
       gal: {
         spelledOut: 'gallons',

@@ -99,4 +99,44 @@ suite('Unit Tests', function() {
 
   });
 
+  suite('convert()', () => {
+
+    test('should correctly convert gal to L', () => {
+      const unit = 'gal';
+      const num = '32';
+      assert.deepEqual(convertHandler.convert(num, unit), 145.4749);
+    });
+
+    test('should correctly convert L to gal', () => {
+      const unit = 'l';
+      const num = '9.09218';
+      assert.deepEqual(convertHandler.convert(num, unit), 2);
+    });
+
+    test('should correctly convert mi to km', () => {
+      const unit = 'mi';
+      const num = '1';
+      assert.deepEqual(convertHandler.convert(num, unit), 1.60934);
+    });
+
+    test('should correctly convert km to mi', () => {
+      const unit = 'km';
+      const num = '430';
+      assert.deepEqual(convertHandler.convert(num, unit), 267.1896);
+    });
+
+    test('should correctly convert lbs to kg', () => {
+      const unit = 'lbs';
+      const num = '200';
+      assert.deepEqual(convertHandler.convert(num, unit), 90.71847);
+    });
+
+    test('should correctly convert kg to lbs', () => {
+      const unit = 'kg';
+      const num = '2.678';
+      assert.deepEqual(convertHandler.convert(num, unit), 5.903979);
+    });
+
+  });
+
 });
