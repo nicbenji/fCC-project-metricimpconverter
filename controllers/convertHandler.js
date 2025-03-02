@@ -1,9 +1,7 @@
-
 function ConvertHandler() {
 
   this.getNum = function(input) {
     const number = input.match(/(\d*\.?\d+)/g);
-    console.log(number);
     if (number === null) {
       return 1;
     }
@@ -25,11 +23,49 @@ function ConvertHandler() {
     return Number(number[0]);
   };
 
+  Object.defineProperty(this, 'units', {
+    value: {
+      km: {
+        returnUnit: 'mi',
+        conversion: ''
+      },
+      mi: {
+        returnUnit: 'km',
+        conversion: ''
+      },
+      kg: {
+        returnUnit: 'lbs',
+        conversion: ''
+      },
+      lbs: {
+        returnUnit: 'kg',
+        conversion: ''
+      },
+      l: {
+        returnUnit: 'gal',
+        conversion: ''
+      },
+      gal: {
+        returnUnit: 'l',
+        conversion: ''
+      }
+    },
+    writable: false,
+    configurable: false,
+    enumerable: true
+  });
 
   this.getUnit = function(input) {
-    let result;
+    const units = Object.keys(this.units);
+    const regex = new RegExp('[\\d.]+\\s*(' + units.join('|') + ')$', 'i');
+    const unitMatch = regex.exec(input);
 
-    return result;
+    if (unitMatch === null) {
+      throw new Error('invalid unit');
+    }
+    const unit = unitMatch[1];
+
+    return unit;
   };
 
   this.getReturnUnit = function(initUnit) {

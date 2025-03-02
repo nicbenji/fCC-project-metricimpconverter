@@ -1,6 +1,7 @@
 const chai = require('chai');
 let assert = chai.assert;
 const ConvertHandler = require('../controllers/convertHandler.js');
+const { test } = require('mocha');
 
 let convertHandler = new ConvertHandler();
 
@@ -40,6 +41,45 @@ suite('Unit Tests', function() {
     test('should use a value of 1 if only unit is provided', () => {
       const input = 'gal';
       assert.deepEqual(convertHandler.getNum(input), 1);
+    });
+
+  });
+
+  suite('getUnit()', () => {
+
+    test('should correctly read each valid input unit', () => {
+      let input = '32km';
+      assert.deepEqual(convertHandler.getUnit(input), 'km');
+      input = '3.45mi';
+      assert.deepEqual(convertHandler.getUnit(input), 'mi');
+
+      input = '3/4gal';
+      assert.deepEqual(convertHandler.getUnit(input), 'gal');
+      input = '2.5l';
+      assert.deepEqual(convertHandler.getUnit(input), 'l');
+
+      input = '4.2/0.3lbs';
+      assert.deepEqual(convertHandler.getUnit(input), 'lbs');
+      input = '78kg';
+      assert.deepEqual(convertHandler.getUnit(input), 'kg');
+    });
+
+    test('should correctly return an error for an invalid unit', () => {
+      let input = '3.4gallbs';
+      assert.throw(() => convertHandler.getUnit(input), 'invalid unit');
+      input = 'kmm';
+      assert.throw(() => convertHandler.getUnit(input), 'invalid unit');
+    });
+
+  });
+
+  suite('getReturnUnit()', () => {
+
+    test('should return the correct unit for each valid input unit', () => {
+      let input = 'km';
+      assert.deepEqual(convertHandler.getReturnUnit(input), 'mi');
+      input = 'gal';
+      assert.deepEqual(convertHandler.getReturnUnit(input), 'l');
     });
 
   });
