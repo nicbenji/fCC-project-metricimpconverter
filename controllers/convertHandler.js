@@ -76,24 +76,35 @@ function ConvertHandler() {
 
   this.getReturnUnit = function(initUnit) {
     const returnUnit = this.units[initUnit.toLowerCase()]?.returnUnit;
+
     if (!returnUnit) {
       throw new Error(`Unsupported unit: ${initUnit}`);
     }
+
     return returnUnit;
   };
 
   this.spellOutUnit = function(unit) {
     const spelledOutUnit = this.units[unit.toLowerCase()]?.spelledOut;
+
     if (!spelledOutUnit) {
       throw new Error(`Unsupported unit: ${unit}`);
     }
+
     return spelledOutUnit;
   };
 
   this.convert = function(initNum, initUnit) {
-    let result;
+    if (typeof initNum !== 'number' || Number.isNaN(initNum)) {
+      throw new TypeError(`Expected number, got ${typeof initNum}`);
+    }
 
-    return result;
+    const conversionRate = this.units[initUnit.toLowerCase()]?.conversion;
+    if (!conversionRate) {
+      throw new Error(`Unsupported unit: ${initUnit}`)
+    }
+
+    return initNum * conversionRate;
   };
 
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {

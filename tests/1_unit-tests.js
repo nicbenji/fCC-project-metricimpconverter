@@ -88,7 +88,7 @@ suite('Unit Tests', function() {
 
   suite('spellOutUnit()', () => {
 
-    test('shoud correctly return the spelled-out string unit for each valid input', () => {
+    test('should correctly return the spelled-out string unit for each valid input', () => {
       let input = 'LBS';
       assert.deepEqual(convertHandler.spellOutUnit(input), 'pounds');
       input = 'mi';
@@ -103,38 +103,38 @@ suite('Unit Tests', function() {
 
     test('should correctly convert gal to L', () => {
       const unit = 'gal';
-      const num = '32';
-      assert.deepEqual(convertHandler.convert(num, unit), 145.4749);
+      const num = 32;
+      assert.deepEqual(convertHandler.convert(num, unit), 121.13312);
     });
 
     test('should correctly convert L to gal', () => {
       const unit = 'l';
-      const num = '9.09218';
-      assert.deepEqual(convertHandler.convert(num, unit), 2);
+      const num = 9.09218;
+      assert.deepEqual(convertHandler.convert(num, unit), 2.40190098298467);
     });
 
     test('should correctly convert mi to km', () => {
       const unit = 'mi';
-      const num = '1';
+      const num = 1;
       assert.deepEqual(convertHandler.convert(num, unit), 1.60934);
     });
 
     test('should correctly convert km to mi', () => {
       const unit = 'km';
-      const num = '430';
-      assert.deepEqual(convertHandler.convert(num, unit), 267.1896);
+      const num = 430;
+      assert.deepEqual(convertHandler.convert(num, unit), 267.1902767594169);
     });
 
     test('should correctly convert lbs to kg', () => {
       const unit = 'lbs';
-      const num = '200';
-      assert.deepEqual(convertHandler.convert(num, unit), 90.71847);
+      const num = 200;
+      assert.deepEqual(convertHandler.convert(num, unit), 90.7184);
     });
 
     test('should correctly convert kg to lbs', () => {
       const unit = 'kg';
-      const num = '2.678';
-      assert.deepEqual(convertHandler.convert(num, unit), 5.903979);
+      const num = 2.678;
+      assert.deepEqual(convertHandler.convert(num, unit), 5.903984197252156);
     });
 
   });
