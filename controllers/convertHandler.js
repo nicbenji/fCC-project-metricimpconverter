@@ -69,9 +69,11 @@ function ConvertHandler() {
   };
 
   this.getReturnUnit = function(initUnit) {
-    let result;
-
-    return result;
+    const returnUnit = this.units[initUnit]?.returnUnit;
+    if (!returnUnit) {
+      throw new Error(`Unsupported unit: ${initUnit}`);
+    }
+    return returnUnit;
   };
 
   this.spellOutUnit = function(unit) {
