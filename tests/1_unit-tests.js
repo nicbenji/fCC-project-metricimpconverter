@@ -38,7 +38,7 @@ suite('Unit Tests', function() {
     test('should use a value of 1 if only unit is provided', () => {
       const input = 'gal';
       assert.deepEqual(convertHandler.getNum(input), 1);
-    })
+    });
 
   });
 
