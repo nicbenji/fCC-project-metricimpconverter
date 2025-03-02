@@ -76,10 +76,12 @@ suite('Unit Tests', function() {
   suite('getReturnUnit()', () => {
 
     test('should return the correct unit for each valid input unit', () => {
-      let input = 'km';
+      let input = 'LBS';
+      assert.deepEqual(convertHandler.getReturnUnit(input), 'kg');
+      input = 'km';
       assert.deepEqual(convertHandler.getReturnUnit(input), 'mi');
       input = 'gal';
-      assert.deepEqual(convertHandler.getReturnUnit(input), 'l');
+      assert.deepEqual(convertHandler.getReturnUnit(input), 'L');
     });
 
   });
@@ -87,10 +89,12 @@ suite('Unit Tests', function() {
   suite('spellOutUnit()', () => {
 
     test('shoud correctly return the spelled-out string unit for each valid input', () => {
-      let input = 'l';
-      assert.deepEqual(convertHandler.spellOutUnit(input), 'liters');
+      let input = 'LBS';
+      assert.deepEqual(convertHandler.spellOutUnit(input), 'pounds');
       input = 'mi';
       assert.deepEqual(convertHandler.spellOutUnit(input), 'miles')
+      input = 'l';
+      assert.deepEqual(convertHandler.spellOutUnit(input), 'liters')
     });
 
   });

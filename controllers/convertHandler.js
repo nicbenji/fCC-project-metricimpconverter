@@ -33,7 +33,7 @@ function ConvertHandler() {
       mi: {
         spelledOut: 'miles',
         returnUnit: 'km',
-        conversion: ''
+        conversion: 1.60934
       },
       kg: {
         spelledOut: 'kilograms',
@@ -43,7 +43,7 @@ function ConvertHandler() {
       lbs: {
         spelledOut: 'pounds',
         returnUnit: 'kg',
-        conversion: ''
+        conversion: 0.453592
       },
       l: {
         spelledOut: 'liters',
@@ -52,8 +52,8 @@ function ConvertHandler() {
       },
       gal: {
         spelledOut: 'gallons',
-        returnUnit: 'l',
-        conversion: ''
+        returnUnit: 'L',
+        conversion: 3.78541
       }
     },
     writable: false,
@@ -75,7 +75,7 @@ function ConvertHandler() {
   };
 
   this.getReturnUnit = function(initUnit) {
-    const returnUnit = this.units[initUnit]?.returnUnit;
+    const returnUnit = this.units[initUnit.toLowerCase()]?.returnUnit;
     if (!returnUnit) {
       throw new Error(`Unsupported unit: ${initUnit}`);
     }
@@ -83,7 +83,7 @@ function ConvertHandler() {
   };
 
   this.spellOutUnit = function(unit) {
-    const spelledOutUnit = this.units[unit]?.spelledOut;
+    const spelledOutUnit = this.units[unit.toLowerCase()]?.spelledOut;
     if (!spelledOutUnit) {
       throw new Error(`Unsupported unit: ${unit}`);
     }
@@ -91,9 +91,6 @@ function ConvertHandler() {
   };
 
   this.convert = function(initNum, initUnit) {
-    const galToL = 3.78541;
-    const lbsToKg = 0.453592;
-    const miToKm = 1.60934;
     let result;
 
     return result;
