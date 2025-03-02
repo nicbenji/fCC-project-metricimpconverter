@@ -19,19 +19,21 @@ suite('Unit Tests', function() {
     });
 
     test('should correctly read a fractional from input', () => {
-      const input = '2/5';
+      const input = '2/5mi';
       assert.deepEqual(convertHandler.getNum(input), 0.4);
     });
 
     test('should correctly read a fractional with decimals from inputs', () => {
-      let input = '2.34/4';
+      let input = '2.34/4L';
       assert.deepEqual(convertHandler.getNum(input), 0.585);
-      input = '31/7.82';
+      input = '31/7.82kg';
       assert.deepEqual(convertHandler.getNum(input), 3.9641943734015346);
     });
 
     test('should incorrectly return an error on a double-fraction', () => {
-      const input = '3/2/3';
+      let input = '3/2/3km';
+      assert.throw(() => convertHandler.getNum(input), 'invalid number');
+      input = '3.2.3lbs';
       assert.throw(() => convertHandler.getNum(input), 'invalid number');
     });
 

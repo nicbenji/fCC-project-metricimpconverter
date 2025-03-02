@@ -17,6 +17,11 @@ function ConvertHandler() {
       const denominator = number[1];
       return numerator / denominator;
     }
+
+    // Throw error if non-fractional number has more than one match e.g. 3.2.3
+    if (number.length > 1) {
+      throw new Error('invalid number');
+    }
     return Number(number[0]);
   };
 
