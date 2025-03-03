@@ -1,7 +1,7 @@
 function ConvertHandler() {
 
   this.getNum = function(input) {
-    const number = input.match(/^(\d*\.?\d+)/g);
+    const number = input.match(/(\d*\.?\d+)/g);
     if (number === null) {
       return 1;
     }
@@ -65,6 +65,7 @@ function ConvertHandler() {
     const units = Object.keys(this.units);
     const regex = new RegExp('(?:\\d+(?:\\.\\d+)?\\s*)?(' + units.join('|') + ')$', 'i');
     const unitMatch = regex.exec(input);
+    console.log(unitMatch);
 
     if (unitMatch === null) {
       throw new Error('invalid unit');

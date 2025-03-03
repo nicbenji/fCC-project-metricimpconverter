@@ -36,6 +36,8 @@ suite('Unit Tests', function() {
       assert.throw(() => convertHandler.getNum(input), 'invalid number');
       input = '3.2.3lbs';
       assert.throw(() => convertHandler.getNum(input), 'invalid number');
+      input = 'adhfjs35lbs';
+      assert.throw(() => convertHandler.getNum(input), 'invalid number');
     });
 
     test('should use a value of 1 if only unit is provided', () => {
