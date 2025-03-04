@@ -15,8 +15,8 @@ suite('Functional Tests', function() {
         .end((err, res) => {
           assert.equal(res.status, 200);
           assert.equal(res.text, '{"initNum":10,"initUnit":"L",'
-            + '"returnNum":2.6417217685798895,"returnUnit":"gal",'
-            + '"string":"10 liters converts to 2.6417217685798895 gallons"}');
+            + '"returnNum":2.64172,"returnUnit":"gal",'
+            + '"string":"10 liters converts to 2.64172 gallons"}');
 
           done();
         });

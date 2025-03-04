@@ -58,7 +58,7 @@ suite('Unit Tests', function() {
       input = '3/4gal';
       assert.deepEqual(convertHandler.getUnit(input), 'gal');
       input = '2.5l';
-      assert.deepEqual(convertHandler.getUnit(input), 'l');
+      assert.deepEqual(convertHandler.getUnit(input), 'L');
 
       input = '4.2/0.3lbs';
       assert.deepEqual(convertHandler.getUnit(input), 'lbs');
@@ -112,7 +112,7 @@ suite('Unit Tests', function() {
     test('should correctly convert L to gal', () => {
       const unit = 'l';
       const num = 9.09218;
-      assert.deepEqual(convertHandler.convert(num, unit), 2.40190098298467);
+      assert.deepEqual(convertHandler.convert(num, unit), 2.40190);
     });
 
     test('should correctly convert mi to km', () => {
@@ -124,7 +124,7 @@ suite('Unit Tests', function() {
     test('should correctly convert km to mi', () => {
       const unit = 'km';
       const num = 430;
-      assert.deepEqual(convertHandler.convert(num, unit), 267.1902767594169);
+      assert.deepEqual(convertHandler.convert(num, unit), 267.18962);
     });
 
     test('should correctly convert lbs to kg', () => {
@@ -136,7 +136,7 @@ suite('Unit Tests', function() {
     test('should correctly convert kg to lbs', () => {
       const unit = 'kg';
       const num = 2.678;
-      assert.deepEqual(convertHandler.convert(num, unit), 5.903984197252156);
+      assert.deepEqual(convertHandler.convert(num, unit), 5.90398);
     });
 
   });

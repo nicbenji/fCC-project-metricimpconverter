@@ -1,26 +1,23 @@
 function ConvertHandler() {
 
   this.getNum = function(input) {
-    const number = input.match(/(\d*\.?\d+)/g);
-    if (number === null) {
+    const number = input.match(/^(?!.*\d+\.\d+\.\d*[\D]+$)(\d*\.?\d+)\/?(\d*\.?\d+)[\D]+$/);
+    if (/^[\D]+$/.test(input)) {
       return 1;
     }
-    if (number.length > 2) {
+    if (!number) {
       throw new Error('invalid number');
     }
 
-    // Handle fractionals
+    // Handle fractions
     if (input.includes('/')) {
-      const numerator = number[0];
-      const denominator = number[1];
+      const numerator = number[1];
+      const denominator = number[2];
       return numerator / denominator;
     }
 
-    // Throw error if non-fractional number has more than one match e.g. 3.2.3
-    if (number.length > 1) {
-      throw new Error('invalid number');
-    }
-    return Number(number[0]);
+    //Concatenate match groups if not fraction
+    return Number(number[1] + number[2]);
   };
 
   Object.defineProperty(this, 'units', {
@@ -28,7 +25,7 @@ function ConvertHandler() {
       km: {
         spelledOut: 'kilometers',
         returnUnit: 'mi',
-        conversion: 1 / 1.60934
+        conversion: 0.6213712
       },
       mi: {
         spelledOut: 'miles',
@@ -38,7 +35,7 @@ function ConvertHandler() {
       kg: {
         spelledOut: 'kilograms',
         returnUnit: 'lbs',
-        conversion: 1 / 0.453592
+        conversion: 2.204623
       },
       lbs: {
         spelledOut: 'pounds',
@@ -48,7 +45,8 @@ function ConvertHandler() {
       l: {
         spelledOut: 'liters',
         returnUnit: 'gal',
-        conversion: 1 / 3.78541
+        conversion: 0.264172,
+        capitalized: true
       },
       gal: {
         spelledOut: 'gallons',
@@ -62,17 +60,18 @@ function ConvertHandler() {
   });
 
   this.getUnit = function(input) {
-    const units = Object.keys(this.units);
-    const regex = new RegExp('(?:\\d+(?:\\.\\d+)?\\s*)?(' + units.join('|') + ')$', 'i');
-    const unitMatch = regex.exec(input);
-    console.log(unitMatch);
-
-    if (unitMatch === null) {
+    const letters = input.match(/[A-Za-z]+$/)[0];
+    console.log(letters);
+    if (!letters) {
       throw new Error('invalid unit');
     }
-    const unit = unitMatch[1];
 
-    return unit;
+    const key = letters.toLowerCase();
+    const isCapitalized = this.units[key]?.['capitalized'];
+    if (!this.units.hasOwnProperty(key)) {
+      throw new Error('invalid unit');
+    }
+    return isCapitalized ? letters.toUpperCase() : key;
   };
 
   this.getReturnUnit = function(initUnit) {
@@ -105,7 +104,7 @@ function ConvertHandler() {
       throw new Error(`Unsupported unit: ${initUnit}`)
     }
 
-    return initNum * conversionRate;
+    return Number((initNum * conversionRate).toFixed(5));
   };
 
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
