@@ -1,7 +1,6 @@
 function splitInput(input) {
   const number = input.match(/^[\d.\/]+/g);
   const unit = input.match(/[^0-9.\/]+$/g);
-  console.log(number, unit);
   return {
     number,
     unit
@@ -30,8 +29,6 @@ function ConvertHandler() {
       if (fraction.length > 2) {
         throw new Error(INVALID_NUMBER);
       }
-
-      console.log(numerator, denominator);
       return numerator / denominator;
     }
 
@@ -48,7 +45,7 @@ function ConvertHandler() {
       km: {
         spelledOut: 'kilometers',
         returnUnit: 'mi',
-        conversion: 0.6213712
+        conversion: 1 / 1.60934
       },
       mi: {
         spelledOut: 'miles',
@@ -58,7 +55,7 @@ function ConvertHandler() {
       kg: {
         spelledOut: 'kilograms',
         returnUnit: 'lbs',
-        conversion: 2.204623
+        conversion: 1 / 0.453592
       },
       lbs: {
         spelledOut: 'pounds',
@@ -68,7 +65,7 @@ function ConvertHandler() {
       l: {
         spelledOut: 'liters',
         returnUnit: 'gal',
-        conversion: 0.264172,
+        conversion: 1 / 3.78541,
         capitalized: true
       },
       gal: {
@@ -119,9 +116,6 @@ function ConvertHandler() {
   };
 
   this.convert = function(initNum, initUnit) {
-    const galToL = 3.78541;
-    const lbsToKg = 0.453592;
-    const miToKm = 1.60934;
 
     if (typeof initNum !== 'number' || Number.isNaN(initNum)) {
       throw new TypeError(`Expected number, got ${typeof initNum}`);

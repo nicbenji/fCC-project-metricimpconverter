@@ -15,10 +15,9 @@ module.exports = function(app) {
       const returnUnit = convertHandler.getReturnUnit(initUnit);
       const resString = convertHandler
         .getString(initNum, initUnit, returnNum, returnUnit);
-      res.json({ initNum, initUnit, returnNum, returnUnit, string: resString });
+      return res.json({ initNum, initUnit, returnNum, returnUnit, string: resString });
     } catch (error) {
-      console.error(error.message);
-      res.send(error.message);
+      return res.send(error.message);
     }
   });
 
