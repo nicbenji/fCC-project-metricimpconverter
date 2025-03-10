@@ -1,23 +1,46 @@
+function splitInput(input) {
+  const number = input.match(/^[\d.\/]+/g);
+  const unit = input.match(/[^0-9.\/]+$/g);
+  console.log(number, unit);
+  return {
+    number,
+    unit
+  }
+}
+
 function ConvertHandler() {
 
   this.getNum = function(input) {
-    const number = input.match(/^(?!.*\d+\.\d+\.\d*[\D]+$)(\d*\.?\d+)\/?(\d*\.?\d+)[\D]+$/);
+    const INVALID_NUMBER = 'invalid number'
+
+    const numberMatch = splitInput(input).number;
     if (/^[\D]+$/.test(input)) {
       return 1;
     }
-    if (!number) {
-      throw new Error('invalid number');
+    if (!numberMatch) {
+      throw new Error(INVALID_NUMBER);
     }
 
+    const numberString = numberMatch[0]
     // Handle fractions
-    if (input.includes('/')) {
-      const numerator = number[1];
-      const denominator = number[2];
+    if (numberString.includes('/')) {
+      const fraction = numberString.split('/');
+      const [numerator, denominator] = fraction;
+
+      if (fraction.length > 2) {
+        throw new Error(INVALID_NUMBER);
+      }
+
+      console.log(numerator, denominator);
       return numerator / denominator;
     }
 
-    //Concatenate match groups if not fraction
-    return Number(number[1] + number[2]);
+    const number = Number(numberString);
+    if (Number.isNaN(number)) {
+      throw new Error(INVALID_NUMBER);
+    }
+
+    return number;
   };
 
   Object.defineProperty(this, 'units', {
@@ -60,18 +83,19 @@ function ConvertHandler() {
   });
 
   this.getUnit = function(input) {
-    const letters = input.match(/[A-Za-z]+$/)[0];
-    console.log(letters);
-    if (!letters) {
-      throw new Error('invalid unit');
+    const INVALID_UNIT = 'invalid unit';
+
+    const unit = splitInput(input).unit[0];
+    if (!unit) {
+      throw new Error(INVALID_UNIT);
     }
 
-    const key = letters.toLowerCase();
+    const key = unit.toLowerCase();
     const isCapitalized = this.units[key]?.['capitalized'];
     if (!this.units.hasOwnProperty(key)) {
-      throw new Error('invalid unit');
+      throw new Error(INVALID_UNIT);
     }
-    return isCapitalized ? letters.toUpperCase() : key;
+    return isCapitalized ? unit.toUpperCase() : key;
   };
 
   this.getReturnUnit = function(initUnit) {
@@ -95,6 +119,10 @@ function ConvertHandler() {
   };
 
   this.convert = function(initNum, initUnit) {
+    const galToL = 3.78541;
+    const lbsToKg = 0.453592;
+    const miToKm = 1.60934;
+
     if (typeof initNum !== 'number' || Number.isNaN(initNum)) {
       throw new TypeError(`Expected number, got ${typeof initNum}`);
     }

@@ -41,9 +41,11 @@ module.exports = function(app) {
 
     if (numError && unitError) {
       throw new Error('invalid number and unit');
-    } else if (numError) {
+    }
+    if (numError) {
       throw new Error(numError);
-    } else if (unitError) {
+    }
+    if (unitError) {
       throw new Error(unitError);
     }
 
